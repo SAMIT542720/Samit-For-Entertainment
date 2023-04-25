@@ -1,12 +1,18 @@
+using Microsoft.AspNetCore.Cors.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Samit_For_Entertainment.Data;
+using Samit_For_Entertainment.Data.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 //dbcontext configuration
 builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
+builder.Services.AddScoped<IACTORSSERVICE, ACTORSSERVICE>();
+builder.Services.AddScoped<ICINAMASSERVICE, CINAMASSERVICE>();
+builder.Services.AddScoped<IMOVIESSERVICE, MOVIESSERVICE>();
+builder.Services.AddScoped<IPRODUCERSSERVIC, PRODUCERSSERVIC>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

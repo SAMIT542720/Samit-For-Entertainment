@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using Samit_For_Entertainment.Data.enums;
+using Samit_For_Entertainment.Data.Base;
 
 namespace Samit_For_Entertainment.Models
 {
-    public class MOVIE
+    public class MOVIE : IEntityBase
     {
         [Key]
         public int ID { get; set; }

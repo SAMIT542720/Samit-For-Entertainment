@@ -1,9 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using Samit_For_Entertainment.Data.Base;
+using System.ComponentModel.DataAnnotations;
 using System.Xml.Linq;
 
 namespace Samit_For_Entertainment.Models
 {
-    public class ACTOR
+    public class ACTOR : IEntityBase
     {
         [Key]
         public int ID { get; set; }
