@@ -30,5 +30,9 @@ namespace Samit_For_Entertainment.Data
         public DbSet<CINAMA> CINAMAS { get; set; }
         public DbSet<PRODUCER> PRODUCERS { get; set; }
         public DbSet<ACTOR_MOVIE> ACTORS_MOVIES { get; set; }
+        //orders
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderItem> OrderItems { get; set; }
+        public DbSet<ShoppingCartItem> shoppingCartItems { get; set; }
     }
 }

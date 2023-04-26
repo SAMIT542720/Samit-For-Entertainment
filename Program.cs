@@ -3,6 +3,8 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Samit_For_Entertainment.Data;
 using Samit_For_Entertainment.Data.Services;
+using Samit_For_Entertainment.Data.SERVICES;
+using Samit_For_EntertainmentE.Data.SERVICES;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,6 +15,7 @@ builder.Services.AddScoped<IACTORSSERVICE, ACTORSSERVICE>();
 builder.Services.AddScoped<ICINAMASSERVICE, CINAMASSERVICE>();
 builder.Services.AddScoped<IMOVIESSERVICE, MOVIESSERVICE>();
 builder.Services.AddScoped<IPRODUCERSSERVIC, PRODUCERSSERVIC>();
+builder.Services.AddScoped<IOredersSERVICE, OrdersSERVICE>();
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
