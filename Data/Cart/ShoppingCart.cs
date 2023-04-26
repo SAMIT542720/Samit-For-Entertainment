@@ -15,15 +15,13 @@ namespace Samit_For_Entertainment.Data.Cart
         public AppDbContext? _context { get; set; }
         public string? ShoppingCartID { get; set; }
         public List<ShoppingCartItem> ShoppingCartItems { get; set; }
-#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         public ShoppingCart(AppDbContext context)
-#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
         {
             _context = context;
         }
         public static ShoppingCart GretSoppingCart(IServiceProvider services)
         {
-            ISession? session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
+            ISession session = services.GetRequiredService<IHttpContextAccessor>()?.HttpContext.Session;
             var context = services.GetService<AppDbContext>();
             string cardid = session.GetString("cardid") ?? Guid.NewGuid().ToString();
             session.SetString("cardid", cardid);
