@@ -1,11 +1,12 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore;
 using Samit_For_Entertainment.Models;
 using System.Collections.Generic;
 using System.Reflection.Emit;
 
 namespace Samit_For_Entertainment.Data
 {
-    public class AppDbContext : DbContext
+    public class AppDbContext:IdentityDbContext<ApplicationUser>
     {
         public AppDbContext(DbContextOptions<AppDbContext> options) : base(options)
         {
