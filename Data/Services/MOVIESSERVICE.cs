@@ -85,7 +85,6 @@ namespace Samit_For_Entertainment.Data.Services
                 await _context.SaveChangesAsync();
             }
         }
-
         async Task<MOVIE> IMOVIESSERVICE.GetMovieByIdAsync(int id)
         {
             var moviedetail = _context.MOVIES

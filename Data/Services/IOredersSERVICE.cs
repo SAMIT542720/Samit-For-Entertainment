@@ -8,7 +8,7 @@ namespace Samit_For_Entertainment.Data.SERVICES
     public interface IOredersSERVICE
     {
         Task StoreOrderAsync(List<ShoppingCartItem> items, string UserID, string UserEmail);
-        Task<List<Order>> GetOrdersByUserIDAsync(string UserID);
+        Task<List<Order>> GetOrdersByUserIDAndRolAsync(string UserID, string userRol);
     }
 
 }

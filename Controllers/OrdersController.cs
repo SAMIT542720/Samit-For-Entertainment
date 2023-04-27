@@ -3,6 +3,7 @@ using Samit_For_Entertainment.Data.Cart;
 using Samit_For_Entertainment.Data.Services;
 using Samit_For_Entertainment.Data.SERVICES;
 using Samit_For_Entertainment.Data.ViewModels;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Samit_For_Entertainment.Controllers
@@ -20,8 +21,9 @@ namespace Samit_For_Entertainment.Controllers
         }
         public async Task<IActionResult> Index()
         {
-            string userid = "";
-            var orders = await _oredersSERVICE.GetOrdersByUserIDAsync(userid);
+            string userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string userRole = User.FindFirstValue(ClaimTypes.Role);
+            var orders = await _oredersSERVICE.GetOrdersByUserIDAndRolAsync(userid,userRole);
             return View(orders);
         }
         public IActionResult ShoppingCart()
@@ -56,8 +58,8 @@ namespace Samit_For_Entertainment.Controllers
         public async Task<IActionResult> CompleteOrder()
         {
             var items = _shoppingCart.GetShoppingCartItems();
-            string userid = "";
-            string useremail = "";
+            string userid = User.FindFirstValue(ClaimTypes.NameIdentifier);
+            string useremail = User.FindFirstValue(ClaimTypes.Email);
             await _oredersSERVICE.StoreOrderAsync(items, userid, useremail);
             await _shoppingCart.ClearShoppingCartAsync();
             return View("OrderCompleted");

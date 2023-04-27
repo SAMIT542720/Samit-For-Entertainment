@@ -16,9 +16,13 @@ namespace Samit_For_EntertainmentE.Data.SERVICES
         {
             _context = context;
         }
-        public async Task<List<Order>> GetOrdersByUserIDAsync(string UserID)
+        public async Task<List<Order>> GetOrdersByUserIDAndRolAsync(string UserID, string userRol)
         {
-            var orders = await _context.Orders.Include(n => n.OrderItems).ThenInclude(n => n.MOVIE).Where(n => n.UserID == UserID).ToListAsync();
+            var orders = await _context.Orders.Include(n => n.OrderItems).ThenInclude(n => n.MOVIE).Include(n=>n.User).ToListAsync();
+            if(userRol != "admin")
+            {
+                orders = orders.Where(n => n.UserID == UserID).ToList();
+            }
             return orders;
         }
 
