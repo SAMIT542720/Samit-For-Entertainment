@@ -26,16 +26,19 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="MOVIES" asp-action="Index"> <i class="bi bi-film">Movies</i></a>
                         </li>
-                        <li class="nav-item dropdown">
-                            <a class="nav-link dropdown-toggle" herf="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                <i class="bi bi-gear"></i>Management
-                            </a>
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" asp-controller="CINAMAS" asp-action="Index"> <i class="bi bi-camera-reels"></i>Cinema</a>
-                                <a class="dropdown-item" asp-controller="PRODUCERS" asp-action="Index"> <i class="bi bi-headset"></i>Producers</a>
-                                <a class="dropdown-item" asp-controller="ACTORS" asp-action="Index"> <i class="bi bi-person-square"></i>Actors</a>
-                            </div>
-                        </li>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("admin"))
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" herf="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                    <i class="bi bi-gear"></i>Management
+                                </a>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-controller="CINAMAS" asp-action="Index"> <i class="bi bi-camera-reels"></i>Cinema</a>
+                                    <a class="dropdown-item" asp-controller="PRODUCERS" asp-action="Index"> <i class="bi bi-headset"></i>Producers</a>
+                                    <a class="dropdown-item" asp-controller="ACTORS" asp-action="Index"> <i class="bi bi-person-square"></i>Actors</a>
+                                </div>
+                            </li>
+                        }
                     </ul>
                     <form class="form-inline my-2 my-lg-0" asp-controller="MOVIES" asp-action="Filter" style="padding-right:25px;">
                         <input name="searchString" type="text" class="form-control" placeholder="Search for a movie....." ria-label="Recipient's username" aria-describedby="button-addon2" />
