@@ -21,7 +21,6 @@ builder.Services.AddScoped<IMOVIESSERVICE, MOVIESSERVICE>();
 builder.Services.AddScoped<IPRODUCERSSERVIC, PRODUCERSSERVIC>();
 builder.Services.AddScoped<IOredersSERVICE, OrdersSERVICE>();
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-builder.Services.AddSession();
 builder.Services.AddScoped(sc => ShoppingCart.GretSoppingCart(sc));
 //Authentication and autherizations
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
