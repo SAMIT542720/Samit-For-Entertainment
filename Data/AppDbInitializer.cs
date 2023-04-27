@@ -13,7 +13,6 @@ namespace Samit_For_Entertainment.Data
             {
                 var context = serviceScop.ServiceProvider.GetService<AppDbContext>();
                 context.Database.EnsureCreated();
-
                 //CINAMA
                 if (!context.CINAMAS.Any())
                 {
