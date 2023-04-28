@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Samit_For_Entertainment.Data.Cart;
 using Samit_For_Entertainment.Data.Services;
 using Samit_For_Entertainment.Data.SERVICES;
+using Samit_For_Entertainment.Data.Static;
 using Samit_For_Entertainment.Data.ViewModels;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace Samit_For_Entertainment.Controllers
 {
+    [Authorize]
     public class OrdersController : Controller
     {
         private readonly IMOVIESSERVICE _mOVIESSERVICE;

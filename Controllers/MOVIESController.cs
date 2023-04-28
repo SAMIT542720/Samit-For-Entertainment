@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Samit_For_Entertainment.Data.Services;
+using Samit_For_Entertainment.Data.Static;
 using Samit_For_Entertainment.Data.ViewModels;
 
 namespace Samit_For_Entertainment.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class MOVIESController : Controller
     {
         private readonly IMOVIESSERVICE _service;
@@ -13,18 +16,21 @@ namespace Samit_For_Entertainment.Controllers
         {
             _service = service;
         }
+        //listing all movies
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var allMOVIES = await _service.GetAllAsync(n => n.CINAMA);
             return View(allMOVIES);
         }
         //movie details
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var moviedetails = await _service.GetMovieByIdAsync(id);
             return View(moviedetails);
         }
-        //new movie
+        //craete a movie
         public async Task<IActionResult> Create()
         {
             var moviedropdownsData = await _service.GetNewMovieDropdownsValuesAsync();

@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Samit_For_Entertainment.Data.Services;
+using Samit_For_Entertainment.Data.Static;
 using Samit_For_Entertainment.Models;
 
 namespace Samit_For_Entertainment.Controllers
 {
+    [Authorize(Roles = UserRoles.Admin)]
     public class CINAMASController : Controller
     {
         private readonly ICINAMASSERVICE _service;
@@ -12,6 +15,8 @@ namespace Samit_For_Entertainment.Controllers
         {
             _service = service;
         }
+        // listing all cincmcs
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var allCINAMAS = await _service.GetAllAsync();
@@ -33,6 +38,7 @@ namespace Samit_For_Entertainment.Controllers
             return RedirectToAction(nameof(Index));
         }
         //Get actor/details
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var actordetails = await _service.GetByIdAsync(id);

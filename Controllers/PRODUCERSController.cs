@@ -1,9 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Samit_For_Entertainment.Data.Services;
+using Samit_For_Entertainment.Data.Static;
 using Samit_For_Entertainment.Models;
 
 namespace Samit_For_Entertainment.Controllers
 {
+    [Authorize(Roles =UserRoles.Admin)]
     public class PRODUCERSController : Controller
     {
         private readonly IPRODUCERSSERVIC _service;
@@ -12,12 +15,15 @@ namespace Samit_For_Entertainment.Controllers
         {
             _service = service;
         }
+        // listing all producers
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var allPRODUCERS = await _service.GetAllAsync();
             return View(allPRODUCERS);
         }
         //PRODUCER DETAILS 
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var producerDetasils = await _service.GetByIdAsync(id);

@@ -7,7 +7,6 @@
     @*register button*@
     <span style="padding:5px;"></span>
     <a class="btn btn-outline-primary my-2 my-sm-0" asp-controller="Account" asp-action="Register"><i class="bi bi-person-plus"></i>Register</a>
-
 }
 else
 {
@@ -21,6 +20,12 @@ else
             <li>
                 <a class="dropdown-item" asp-controller="Orders" asp-action="Index"><i class="bi bi-list"></i>Orders</a>
             </li>
+            @if (User.IsInRole("admin"))
+            {
+                <li>
+                    <a class="dropdown-item" asp-controller="Account" asp-action="Users"><i class="bi bi-list"></i>Users</a>
+                </li>
+            }
         </ul>
     </div>
     @*logout button*@

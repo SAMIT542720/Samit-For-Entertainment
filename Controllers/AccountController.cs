@@ -7,6 +7,7 @@ using Samit_For_Entertainment.Data;
 using Samit_For_Entertainment.Data.ViewModels;
 using Samit_For_EntertainmentData.ViewModels;
 using Samit_For_Entertainment.Data.Static;
+using Microsoft.EntityFrameworkCore;
 
 namespace Samit_For_Entertainment.Controllers
 {
@@ -21,13 +22,18 @@ namespace Samit_For_Entertainment.Controllers
             _signInManager = signInManager;
             _context = context;
         }
+        public async Task<IActionResult> Users()
+        {
+            var users = await _context.Users.ToListAsync();
+            return View(users);
+        }
         public IActionResult Login() => View(new LoginVM());
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM loginVM)
         {
             if (!ModelState.IsValid) return View(loginVM);
             var user = await _userManager.FindByEmailAsync(loginVM.EmialAddress);
-            if(user != null)
+            if (user != null)
             {
                 var passowrdcheck = await _userManager.CheckPasswordAsync(user, loginVM.Password);
                 if (passowrdcheck)
@@ -37,7 +43,7 @@ namespace Samit_For_Entertainment.Controllers
                     {
                         return RedirectToAction("Index", "MOVIES");
                     }
-                } 
+                }
                 TempData["Error"] = "Incorrect password, Please try again";
                 return View(loginVM);
             }
@@ -77,6 +83,10 @@ namespace Samit_For_Entertainment.Controllers
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "MOVIES");
+        }
+        public IActionResult AccessDenied(string ReturnUrl )
+        {
+            return View();
         }
     }
 }
